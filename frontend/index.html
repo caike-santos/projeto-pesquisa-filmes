@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Recomendações de Filmes e Séries</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="app-container">
+        
+        <header class="form-header">
+            <span class="form-badge">🎬 CinePerfil</span>
+            <h1>Crie seu Perfil Cinematográfico</h1>
+            <p>Personalize suas preferências para receber recomendações sob medida</p>
+        </header>
+        
+        <form action="/processar_cadastro" method="POST" enctype="multipart/form-data">
+            
+            <!-- 1. DADOS PESSOAIS -->
+            <fieldset>
+                <legend><span class="step-num">1</span> Dados Pessoais</legend>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nome" class="label-required">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="label-required">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                    </div>
+                </div>
+
+                <div class="form-grid-3">
+                    <div class="form-group">
+                        <label for="senha" class="label-required">Senha</label>
+                        <input type="password" id="senha" name="senha" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nascimento">Data de Nascimento</label>
+                        <input type="date" id="nascimento" name="nascimento">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="idade">Idade (Aproximada)</label>
+                        <input type="number" id="idade" name="idade" min="10" max="100" placeholder="Ex: 25">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- 2. PREFERÊNCIAS DE CONTEÚDO -->
+            <fieldset>
+                <legend><span class="step-num">2</span> Preferências de Conteúdo</legend>
+
+                <span class="section-subtitle">O que você mais gosta de assistir?</span>
+                <span class="section-help">Selecione todos os formatos do seu interesse</span>
+                <div class="pill-grid">
+                    <div class="pill-item">
+                        <input type="checkbox" id="tipo_filme" name="formato" value="filmes">
+                        <label for="tipo_filme">🎬 Filmes Longos</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="tipo_serie" name="formato" value="series">
+                        <label for="tipo_serie">📺 Séries e Antologias</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="tipo_curta" name="formato" value="curtas">
+                        <label for="tipo_curta">🎞️ Curtas de Animação</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="tipo_documentario" name="formato" value="documentarios">
+                        <label for="tipo_documentario">🌍 Documentários</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="tipo_minisserie" name="formato" value="minisseries">
+                        <label for="tipo_minisserie">⏳ Minisséries</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="tipo_anime" name="formato" value="anime">
+                        <label for="tipo_anime">⚡ Anime</label>
+                    </div>
+                </div>
+
+                <span class="section-subtitle">Qual o clima / mood que você prefere?</span>
+                <span class="section-help">Marque as emoções e atmosferas que te atraem</span>
+                <div class="pill-grid">
+                    <div class="pill-item">
+                        <input type="checkbox" id="mood_suspense" name="mood" value="suspense">
+                        <label for="mood_suspense">⚡ Suspense e tensão</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="mood_emocional" name="mood" value="emocional">
+                        <label for="mood_emocional">🥹 Emocionante e comovente</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="mood_comedia" name="mood" value="comedia">
+                        <label for="mood_comedia">😂 Leve e engraçado</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="mood_reflexivo" name="mood" value="reflexivo">
+                        <label for="mood_reflexivo">🧠 Reflexivo e filosófico</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="mood_adrenalina" name="mood" value="adrenalina">
+                        <label for="mood_adrenalina">🔥 Ação e adrenalina</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="mood_romantico" name="mood" value="romantico">
+                        <label for="mood_romantico">💖 Romântico</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="mood_assustador" name="mood" value="assustador">
+                        <label for="mood_assustador">👻 Terror e arrepio</label>
+                    </div>
+                </div>
+
+                <span class="section-subtitle">Com qual frequência você costuma maratonar?</span>
+                <div class="pill-grid">
+                    <div class="pill-item">
+                        <input type="radio" id="freq_diaria" name="frequencia" value="diaria">
+                        <label for="freq_diaria">🔥 Todo dia</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="radio" id="freq_alta" name="frequencia" value="alta">
+                        <label for="freq_alta">🍿 Fins de semana</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="radio" id="freq_media" name="frequencia" value="media">
+                        <label for="freq_media">☕ Às vezes</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="radio" id="freq_baixa" name="frequencia" value="baixa">
+                        <label for="freq_baixa">🌙 Raramente</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="genero_favorito">Gênero Favorito Principal</label>
+                    <select id="genero_favorito" name="genero_favorito">
+                        <option value="" disabled selected>Selecione um gênero...</option>
+                        <optgroup label="Ficção e Fantasia">
+                            <option value="sci_fi">Ficção Científica e Distopias</option>
+                            <option value="fantasia">Fantasia épica</option>
+                            <option value="superheroi">Super-heróis</option>
+                            <option value="steampunk">Steampunk e retrofuturismo</option>
+                        </optgroup>
+                        <optgroup label="Suspense e Drama">
+                            <option value="thriller">Suspense Psicológico</option>
+                            <option value="noir">Noir e policial</option>
+                            <option value="crime">Crime e investigação</option>
+                            <option value="drama">Drama familiar</option>
+                            <option value="biografia">Biográfico / Baseado em fatos reais</option>
+                        </optgroup>
+                        <optgroup label="Ação e Aventura">
+                            <option value="action">Ação</option>
+                            <option value="aventura">Aventura e exploração</option>
+                            <option value="guerra">Guerra e histórico</option>
+                            <option value="esporte">Esporte</option>
+                        </optgroup>
+                        <optgroup label="Comédia e Romance">
+                            <option value="comedy">Comédia</option>
+                            <option value="romcom">Comédia Romântica</option>
+                            <option value="romance">Romance</option>
+                        </optgroup>
+                        <optgroup label="Terror e Mistério">
+                            <option value="horror">Terror / Horror</option>
+                            <option value="misterio">Mistério</option>
+                            <option value="sobrenatural">Sobrenatural e Ocultismo</option>
+                        </optgroup>
+                        <optgroup label="Animação e Família">
+                            <option value="animacao">Animação</option>
+                            <option value="familia">Família</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <span class="section-subtitle">Subgêneros que te interessam:</span>
+                <div class="pill-grid">
+                    <div class="pill-item">
+                        <input type="checkbox" id="sub_cyberpunk" name="subgenero" value="cyberpunk">
+                        <label for="sub_cyberpunk">Cyberpunk</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="sub_space_opera" name="subgenero" value="space_opera">
+                        <label for="sub_space_opera">Space Opera</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="sub_apokalipse" name="subgenero" value="apokalipse">
+                        <label for="sub_apokalipse">Pós-Apocalíptico</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="sub_vampiros" name="subgenero" value="vampiros">
+                        <label for="sub_vampiros">Vampiros e criaturas</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="sub_espionagem" name="subgenero" value="espionagem">
+                        <label for="sub_espionagem">Espionagem</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="sub_western" name="subgenero" value="western">
+                        <label for="sub_western">Western</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="sub_musical" name="subgenero" value="musical">
+                        <label for="sub_musical">Musical</label>
+                    </div>
+                    <div class="pill-item">
+                        <input type="checkbox" id="sub_mockumentary" name="subgenero" value="mockumentary">
+                        <label for="sub_mockumentary">Mockumentary</label>
+                    </div>
+                </div>
+
+                <div class="range-container">
+                    <div class="range-header">
+                        <span class="range-label">Interesse em tecnologia e futuro:</span>
+                    </div>
+                    <div class="range-controls">
+                        <span class="range-bound">Baixo</span>
+                        <input type="range" id="peso_tecnologia" name="peso_tecnologia" min="1" max="10" value="5">
+                        <span class="range-bound">Alto</span>
+                    </div>
+                </div>
+
+                <div class="range-container">
+                    <div class="range-header">
+                        <span class="range-label">Preferência por narrativas emocionais e dramáticas:</span>
+                    </div>
+                    <div class="range-controls">
+                        <span class="range-bound">Prefiro leve</span>
+                        <input type="range" id="peso_emocao" name="peso_emocao" min="1" max="10" value="5">
+                        <span class="range-bound">Adoro chorar</span>
+                    </div>
+                </div>
+
+                <div class="range-container">
+                    <div class="range-header">
+                        <span class="range-label">Complexidade da trama:</span>
+                    </div>
+                    <div class="range-controls">
+                        <span class="range-bound">Simples</span>
+                        <input type="range" id="peso_complexidade" name="peso_complexidade" min="1" max="10" value="5">
+                        <span class="range-bound">Muito elaborada</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tema_pesquisa">Temática de interesse rápido (Autocompletar):</label>
+                    <input type="text" list="temas" id="tema_pesquisa" name="tema_pesquisa" placeholder="Digite para buscar... Ex: Cyberpunk">
+                    <datalist id="temas">
+                        <option value="Inteligência Artificial">
+                        <option value="Realidade Virtual">
+                        <option value="Viagem no Tempo">
+                        <option value="Alienígenas">
+                        <option value="Cyberpunk">
+                        <option value="Distopia">
+                        <option value="Pós-Apocalíptico">
+                        <option value="Espionagem">
+                        <option value="Vampiros">
+                        <option value="Lobisomem">
+                        <option value="Magia e Feitiçaria">
+                        <option value="Espaço Sideral">
+                        <option value="Robótica e Androides">
+                        <option value="Clonagem">
+                        <option value="Pandemias e Vírus">
+                        <option value="Jogos e Simulações">
+                        <option value="Heróis e Vilões">
+                        <option value="Mitologia Nórdica">
+                        <option value="Mitologia Grega">
+                        <option value="Samurais e Japão Feudal">
+                        <option value="Piratas">
+                        <option value="Guerras Mundiais">
+                        <option value="Crime Organizado">
+                        <option value="Detetive e Investigação">
+                        <option value="Survival (Sobrevivência)">
+                        <option value="Multiverso">
+                        <option value="Ecologia e Natureza">
+                        <option value="Música e Arte">
+                        <option value="Esporte de Alta Performance">
+                        <option value="Família e Relacionamentos">
+                    </datalist>
+                </div>
+            </fieldset>
+
+            <!-- 3. CUSTOMIZAÇÃO DO PERFIL -->
+            <fieldset>
+                <legend><span class="step-num">3</span> Customização do Perfil</legend>
+
+                <div class="form-group">
+                    <label for="cor_perfil">Cor destaque do seu perfil:</label>
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="cor_perfil" name="cor_perfil" value="#e50914">
+                        <span style="font-size: var(--font-size-sm); color: var(--text-secondary);">Escolha uma cor para personalizar sua interface</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="avatar">Foto de Perfil (Avatar):</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">Biografia / Sobre mim:</label>
+                    <textarea id="bio" name="bio" rows="4" placeholder="Conte um pouco sobre suas franquias favoritas, diretores ou histórias inesquecíveis..."></textarea>
+                </div>
+                
+                <input type="hidden" name="origem_cadastro" value="formulario_web">
+            </fieldset>
+
+            <!-- AÇÕES DO FORMULÁRIO -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Cadastrar e Gerar Recomendações</button>
+                <button type="reset" class="btn btn-secondary">Limpar Formulário</button>
+            </div>
+            
+        </form>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

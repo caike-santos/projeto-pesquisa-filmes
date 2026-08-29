@@ -1,0 +1,1056 @@
+/* ==========================================================================
+   VARIÁVEIS GLOBAIS DE CORES E ESTILOS (MODO ESCURO - SEM GRADIENTES)
+   Reutilize estas variáveis em todas as telas do projeto.
+   ========================================================================== */
+:root {
+    /* Superfícies e Fundos */
+    --bg-app: #0c0e14;              /* Fundo principal da página */
+    --bg-surface: #141722;          /* Fundo dos cartões e contêineres principais */
+    --bg-surface-elevated: #1a1e2c; /* Fundo de fieldsets e seções destacadas */
+    --bg-surface-hover: #222738;    /* Hover de elementos e cartões */
+    --bg-input: #0e111a;            /* Fundo de inputs e selects */
+    --bg-input-focus: #121520;      /* Fundo de inputs quando focados */
+    --bg-pill: #1a1e2b;             /* Fundo de chips / pills não selecionados */
+    --bg-pill-hover: #262c3e;       /* Fundo de chips / pills ao passar o mouse */
+    --bg-pill-selected: #e50914;    /* Fundo de chips selecionados (Destaque sólido) */
+
+    /* Tipografia e Textos */
+    --text-primary: #f8fafc;        /* Texto principal de alto contraste */
+    --text-secondary: #94a3b8;      /* Texto de suporte / subtítulos */
+    --text-muted: #64748b;          /* Textos desabilitados ou placeholders */
+    --text-inverse: #ffffff;        /* Texto sobre fundos de destaque */
+    --text-accent: #ff3344;         /* Texto colorido em destaque */
+
+    /* Cores de Ação e Destaque (Sólidas) */
+    --color-primary: #e50914;        /* Cor primária (Vermelho Cinema) */
+    --color-primary-hover: #f40612;  /* Hover do botão primário */
+    --color-primary-active: #b80710; /* Clique do botão primário */
+    --color-primary-subtle: #2d1216; /* Fundo sutil com tom primário */
+    
+    --color-secondary: #2d3345;      /* Botão secundário / neutro */
+    --color-secondary-hover: #3b435a;
+    --color-secondary-active: #202431;
+
+    --color-success: #10b981;        /* Sucesso / Confirmação */
+    --color-warning: #f59e0b;        /* Alerta / Atenção */
+    --color-danger: #ef4444;         /* Erro / Perigo */
+    --color-info: #38bdf8;           /* Informativo */
+
+    /* Bordas e Divisores */
+    --border-subtle: #202534;        /* Bordas discretas */
+    --border-color: #2b3246;         /* Borda padrão de inputs e cartões */
+    --border-hover: #434d6b;         /* Borda ao passar o mouse */
+    --border-focus: #e50914;         /* Borda de foco nos campos */
+    --border-focus-ring: rgba(229, 9, 20, 0.25); /* Anel de foco acessível */
+
+    /* Raios de Arredondamento */
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 22px;
+    --radius-full: 9999px;
+
+    /* Sombras Sólidas/Opacas (Sem gradientes) */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.55);
+    --shadow-input-focus: 0 0 0 3px var(--border-focus-ring);
+
+    /* Tipografia */
+    --font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.35rem;
+    --font-size-2xl: 1.75rem;
+    --font-size-3xl: 2.15rem;
+
+    /* Transições */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+}
+
+/* ==========================================================================
+   RESET E CONFIGURAÇÃO BASE
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2.5rem 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   CONTAINER PRINCIPAL
+   ========================================================================== */
+.app-container {
+    width: 100%;
+    max-width: 860px;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem;
+}
+
+/* Cabeçalho da Página */
+.form-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.form-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--color-primary-subtle);
+    color: var(--text-accent);
+    border: 1px solid rgba(229, 9, 20, 0.35);
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+}
+
+.form-header h1 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.form-header p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+}
+
+/* ==========================================================================
+   SEÇÕES / FIELDSETS
+   ========================================================================== */
+fieldset {
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+    transition: border-color var(--transition-fast);
+}
+
+fieldset:hover {
+    border-color: var(--border-hover);
+}
+
+legend {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 0.4rem 1rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+legend .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: var(--color-primary);
+    color: var(--text-inverse);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: bold;
+}
+
+/* Subtítulos de grupo dentro dos fieldsets */
+.section-subtitle {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.section-subtitle:first-of-type {
+    margin-top: 0.5rem;
+}
+
+.section-help {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    margin-top: -0.5rem;
+    margin-bottom: 0.85rem;
+    display: block;
+}
+
+/* ==========================================================================
+   GRID DE FORMULÁRIO E GRUPOS DE CAMPOS
+   ========================================================================== */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.form-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: 1.25rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* ==========================================================================
+   RÓTULOS (LABELS)
+   ========================================================================== */
+label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.label-required::after {
+    content: "*";
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   INPUTS DE TEXTO, EMAIL, SENHA, DATA, NÚMERO, SELECT E TEXTAREA
+   ========================================================================== */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input:not([type]),
+input[list],
+select,
+textarea {
+    width: 100%;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    outline: none;
+    transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="search"]::placeholder,
+input[list]::placeholder,
+input:not([type])::placeholder,
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input:not([type]):focus,
+input[list]:focus,
+select:focus,
+textarea:focus {
+    background-color: var(--bg-input-focus);
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-input-focus);
+}
+
+/* Ajustes de date & number no modo escuro */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+    cursor: pointer;
+}
+
+/* Select */
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+select optgroup {
+    background-color: var(--bg-surface-elevated);
+    color: var(--text-accent);
+    font-weight: bold;
+    padding: 0.5rem 0;
+}
+
+select option {
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    padding: 0.5rem;
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ==========================================================================
+   PILLS / CHIPS INTERATIVOS (CHECKBOXES E RADIOS)
+   ========================================================================== */
+.pill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.pill-item {
+    display: inline-flex;
+    position: relative;
+}
+
+.pill-item input[type="checkbox"],
+.pill-item input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.pill-item label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background-color: var(--bg-pill);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    padding: 0.5rem 1rem;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.pill-item label:hover {
+    background-color: var(--bg-pill-hover);
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+}
+
+/* Estado selecionado */
+.pill-item input[type="checkbox"]:checked + label,
+.pill-item input[type="radio"]:checked + label {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--text-inverse);
+    font-weight: 600;
+}
+
+.pill-item input[type="checkbox"]:focus-visible + label,
+.pill-item input[type="radio"]:focus-visible + label {
+    box-shadow: var(--shadow-input-focus);
+}
+
+/* ==========================================================================
+   SLIDERS DE INTERVALO (RANGE)
+   ========================================================================== */
+.range-container {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.range-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.range-label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.range-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.range-bound {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background-color: var(--bg-surface-hover);
+    border-radius: var(--radius-full);
+    outline: none;
+    cursor: pointer;
+    border: 1px solid var(--border-subtle);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-primary);
+    border: 2px solid var(--text-inverse);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    background-color: var(--color-primary-hover);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-primary);
+    border: 2px solid var(--text-inverse);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   INPUTS ESPECIAIS (COR E ARQUIVO)
+   ========================================================================== */
+.color-picker-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1rem;
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    background: none;
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+}
+
+.file-input-wrapper {
+    background-color: var(--bg-input);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    transition: border-color var(--transition-fast);
+}
+
+.file-input-wrapper:hover {
+    border-color: var(--border-hover);
+}
+
+input[type="file"] {
+    width: 100%;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--color-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-xs);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    margin-right: 1rem;
+    transition: background-color var(--transition-fast);
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+/* ==========================================================================
+   BOTÕES E AÇÕES DO FORMULÁRIO
+   ========================================================================== */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--text-inverse);
+    flex: 2;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-primary:active {
+    background-color: var(--color-primary-active);
+    transform: translateY(1px);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    flex: 1;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary-hover);
+    color: var(--text-primary);
+}
+
+.btn-secondary:active {
+    background-color: var(--color-secondary-active);
+    transform: translateY(1px);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE & TABLETS)
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0.75rem;
+    }
+
+    .app-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .form-grid,
+    .form-grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   MENSAGENS DE FEEDBACK (CADASTRO / ERRO / SUCESSO)
+   ========================================================================== */
+.feedback-message {
+    padding: 1.1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    display: none;
+    line-height: 1.5;
+}
+
+.feedback-success {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid var(--color-success);
+}
+
+.feedback-error {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    border: 1px solid var(--color-danger);
+}
+
+/* ==========================================================================
+   TELA INICIAL (DASHBOARD TEMPORÁRIO DE FILMES)
+   ========================================================================== */
+.home-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Barra de Navegação Superior */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.nav-brand-badge {
+    background-color: var(--color-primary);
+    color: var(--text-inverse);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size-xs);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-profile-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+}
+
+.user-avatar-circle {
+    width: 26px;
+    height: 26px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary);
+    color: var(--text-inverse);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--font-size-xs);
+}
+
+/* Hero de Boas-vindas */
+.welcome-hero {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    border-left: 5px solid var(--color-primary);
+}
+
+.welcome-hero h2 {
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.welcome-hero p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+    margin-bottom: 1.25rem;
+}
+
+.hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.hero-tag {
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+}
+
+/* Seção de Busca e Filtro */
+.search-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+}
+
+.section-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-input-wrapper {
+    flex: 1;
+    max-width: 420px;
+    position: relative;
+}
+
+/* Grid de Filmes Recomendados */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Card Individual de Filme */
+.movie-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+}
+
+.movie-poster-wrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-color: var(--bg-input);
+    overflow: hidden;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-rating-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background-color: #000000;
+    color: #facc15;
+    border: 1px solid rgba(250, 204, 21, 0.4);
+    padding: 0.25rem 0.55rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.movie-info {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.movie-title {
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+}
+
+.movie-year {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.movie-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: 0.85rem;
+}
+
+.genre-tag {
+    background-color: var(--bg-surface-elevated);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-xs);
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.movie-overview {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+.movie-reason {
+    background-color: var(--color-primary-subtle);
+    border-left: 3px solid var(--color-primary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    font-size: 0.725rem;
+    color: #fca5a5;
+    line-height: 1.4;
+    margin-top: auto;
+}
+
+/* Estado Vazio */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background-color: var(--bg-surface);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+}
+
+.empty-state h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================================================
+   BANNER DECORATIVO DE PESQUISA DE FILMES
+   ========================================================================== */
+.global-search-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.global-search-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.global-search-header h3 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.global-search-header p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.search-form-mock {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 720px;
+    margin: 0 auto 1.25rem auto;
+}
+
+.search-form-mock input[type="text"],
+.search-form-mock input[type="search"] {
+    flex: 1;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1.25rem;
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-form-mock input:focus {
+    border-color: var(--border-focus);
+    box-shadow: var(--shadow-input-focus);
+}
+
+.search-btn-mock {
+    background-color: var(--color-primary);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1.75rem;
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    white-space: nowrap;
+}
+
+.search-btn-mock:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.search-btn-mock:active {
+    background-color: var(--color-primary-active);
+    transform: translateY(1px);
+}
+
+.search-quick-tags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+}
+
+.quick-filter-tag {
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.quick-filter-tag:hover {
+    background-color: var(--bg-surface-hover);
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+    .search-form-mock {
+        flex-direction: column;
+    }
+
+    .search-btn-mock {
+        width: 100%;
+        justify-content: center;
+    }
+}
+

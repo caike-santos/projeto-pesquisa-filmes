@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - Sugestões de Filmes e Séries</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="home-container">
+        
+        <!-- BARRA DE NAVEGAÇÃO -->
+        <nav class="navbar">
+            <a href="home.html" class="nav-brand">
+                <span class="nav-brand-badge">Cine</span>
+                <span>Perfil</span>
+            </a>
+            
+            <div class="nav-actions">
+                <div class="user-profile-badge" id="user-badge">
+                    <span class="user-avatar-circle" id="user-avatar">👤</span>
+                    <span id="user-display-name">Carregando...</span>
+                </div>
+                <a href="index.html" class="btn btn-secondary" style="padding: 0.45rem 0.9rem; font-size: var(--font-size-xs);">
+                    ⚙️ Novo Cadastro
+                </a>
+            </div>
+        </nav>
+
+        <!-- HERO DE BOAS-VINDAS COM DADOS DO CADASTRO -->
+        <section class="welcome-hero" id="welcome-hero">
+            <h2 id="hero-greeting">Bem-vindo(a) ao seu catálogo personalizado!</h2>
+            <p id="hero-bio">Carregando suas preferências...</p>
+            
+            <div class="hero-tags" id="hero-tags">
+                <!-- Tags de gêneros, mood e temas preenchidas dinamicamente via JS -->
+            </div>
+        </section>
+
+        <!-- CAMPO DE PESQUISA DE FILMES (DECORATIVO / ENFEITE) -->
+        <section class="global-search-card">
+            <div class="global-search-header">
+                <h3><span>🎬</span> Pesquisar no Catálogo Global de Filmes</h3>
+                <p>Encontre sinopses, elenco, notas e onde assistir seus títulos favoritos</p>
+            </div>
+
+            <form class="search-form-mock" onsubmit="event.preventDefault();">
+                <input type="text" placeholder="Digite o nome de um filme, série ou diretor... (Ex: Matrix, Interestelar, Oppenheimer)">
+                <button type="button" class="search-btn-mock">
+                    <span>🔍</span> Buscar Filme
+                </button>
+            </form>
+
+            <div class="search-quick-tags">
+                <span>Sugestões rápidas:</span>
+                <span class="quick-filter-tag">🔥 Em Alta</span>
+                <span class="quick-filter-tag">⭐ Melhores Avaliados</span>
+                <span class="quick-filter-tag">🚀 Ficção Científica</span>
+                <span class="quick-filter-tag">🏆 Vencedores do Oscar</span>
+                <span class="quick-filter-tag">🍿 Lançamentos 2026</span>
+            </div>
+        </section>
+
+        <!-- BARRA DE BUSCA E TÍTULO DA SEÇÃO DE RECOMENDAÇÕES -->
+        <div class="search-section">
+            <h3 class="section-title">
+                <span>🍿</span> Filmes e Séries Recomendados para Você
+            </h3>
+
+            <div class="search-input-wrapper">
+                <input type="search" id="search-movies" placeholder="Filtrar por título, gênero ou temática...">
+            </div>
+        </div>
+
+        <!-- GRID DE FILMES (GERADO DINAMICAMENTE) -->
+        <div class="movies-grid" id="movies-grid">
+            <!-- Cards de filmes inseridos via home.js -->
+        </div>
+
+    </div>
+
+    <script src="home.js"></script>
+</body>
+</html>
