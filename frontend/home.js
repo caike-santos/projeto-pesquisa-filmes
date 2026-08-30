@@ -70,6 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Botão de Logout
+    const logoutBtn = document.getElementById('btn-logout');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('cine_user');
+            sessionStorage.removeItem('cine_recommendations');
+            window.location.href = 'login.html';
+        });
+    }
+
     // 5. Configura os Chips de Filtros Rápidos (Em Alta, Avaliados, etc.)
     const quickTags = document.querySelectorAll('.quick-filter-tag');
     quickTags.forEach(tag => {

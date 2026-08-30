@@ -83,6 +83,22 @@ public class UsuarioService {
     }
 
     /**
+     * Autentica o usuário pelo e-mail e valida a senha criptografada via BCrypt
+     */
+    @Transactional(readOnly = true)
+    public Usuario autenticar(String email, String senhaPura) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("E-mail não cadastrado no sistema."));
+
+        if (!passwordEncoder.matches(senhaPura, usuario.getSenha())) {
+            throw new IllegalArgumentException("Senha incorreta.");
+        }
+
+        log.info("Usuário '{}' autenticado com sucesso!", usuario.getNome());
+        return usuario;
+    }
+
+    /**
      * Busca usuário por ID
      */
     @Transactional(readOnly = true)

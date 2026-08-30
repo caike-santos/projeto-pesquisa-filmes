@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CinePerfil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="app-container" style="max-width: 480px; margin-top: 2rem;">
+        
+        <header class="form-header">
+            <span class="form-badge">🎬 CinePerfil</span>
+            <h1>Acesse sua Conta</h1>
+            <p>Entre para acessar seu catálogo personalizado e recomendações</p>
+        </header>
+
+        <!-- Mensagens de feedback (Erro / Sucesso) -->
+        <div id="login-feedback" class="feedback-message" style="display: none;"></div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email" class="label-required">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required autocomplete="email">
+            </div>
+
+            <div class="form-group">
+                <label for="senha" class="label-required">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+
+            <div class="form-actions" style="margin-top: 1.5rem; flex-direction: column; gap: 0.75rem;">
+                <button type="submit" class="btn btn-primary" id="btn-login" style="width: 100%;">
+                    Entrar no CinePerfil
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle); font-size: var(--font-size-sm); color: var(--text-secondary);">
+                Ainda não tem uma conta?
+                <a href="index.html" style="color: var(--text-accent); text-decoration: none; font-weight: 600; margin-left: 0.35rem;">
+                    Cadastre-se aqui
+                </a>
+            </div>
+        </form>
+
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

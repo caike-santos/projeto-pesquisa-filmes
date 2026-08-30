@@ -25,6 +25,30 @@ public class UsuarioController {
     }
 
     /**
+     * Endpoint REST para login e autenticação de usuário (POST /api/usuarios/login)
+     */
+    @PostMapping("/api/usuarios/login")
+    public ResponseEntity<Map<String, Object>> login(@Valid @RequestBody com.pesquisa.filmes.dto.LoginDTO dto) {
+        try {
+            Usuario usuarioAutenticado = usuarioService.autenticar(dto.getEmail(), dto.getSenha());
+            List<FilmeDTO> recomendacoes = usuarioService.obterRecomendacoesDoUsuario(usuarioAutenticado.getId());
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", "sucesso");
+            response.put("mensagem", "Login realizado com sucesso! Bem-vindo(a) de volta.");
+            response.put("usuario", usuarioAutenticado);
+            response.put("recomendacoes", recomendacoes);
+
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("status", "erro");
+            errorResponse.put("mensagem", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+        }
+    }
+
+    /**
      * Endpoint REST para cadastro via JSON (POST /api/usuarios)
      */
     @PostMapping("/api/usuarios")
