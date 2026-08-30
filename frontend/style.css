@@ -1054,45 +1054,4 @@ input[type="file"]::file-selector-button:hover {
     }
 }
 
-/* ==========================================================================
-   TELA DE LOGIN COMPACTA E CENTRALIZADA
-   ========================================================================== */
-.login-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 1.5rem;
-}
-
-.login-card {
-    width: 100%;
-    max-width: 420px;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    padding: 2.25rem 2rem;
-}
-
-.login-header {
-    text-align: center;
-    margin-bottom: 1.75rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--border-subtle);
-}
-
-.login-header h1 {
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 0.35rem;
-}
-
-.login-header p {
-    font-size: var(--font-size-sm);
-    color: var(--text-secondary);
-    line-height: 1.4;
-}
-
 
