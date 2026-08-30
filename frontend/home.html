@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - Sugestões de Filmes e Séries</title>
+    <title>Início - Sugestões e Pesquisa de Filmes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,38 +38,38 @@
             </div>
         </section>
 
-        <!-- CAMPO DE PESQUISA DE FILMES (DECORATIVO / ENFEITE) -->
+        <!-- CAMPO DE PESQUISA GLOBAL DE FILMES CONECTADO AO WEB SERVICE -->
         <section class="global-search-card">
             <div class="global-search-header">
                 <h3><span>🎬</span> Pesquisar no Catálogo Global de Filmes</h3>
-                <p>Encontre sinopses, elenco, notas e onde assistir seus títulos favoritos</p>
+                <p>Busque qualquer título em tempo real conectado ao Web Service oficial</p>
             </div>
 
-            <form class="search-form-mock" onsubmit="event.preventDefault();">
-                <input type="text" placeholder="Digite o nome de um filme, série ou diretor... (Ex: Matrix, Interestelar, Oppenheimer)">
-                <button type="button" class="search-btn-mock">
+            <form class="search-form-mock" id="global-search-form">
+                <input type="text" id="global-search-input" placeholder="Digite o nome de um filme, série ou diretor... (Ex: Matrix, Interestelar, Batman, Vingadores)">
+                <button type="submit" class="search-btn-mock" id="global-search-btn">
                     <span>🔍</span> Buscar Filme
                 </button>
             </form>
 
             <div class="search-quick-tags">
                 <span>Sugestões rápidas:</span>
-                <span class="quick-filter-tag">🔥 Em Alta</span>
-                <span class="quick-filter-tag">⭐ Melhores Avaliados</span>
-                <span class="quick-filter-tag">🚀 Ficção Científica</span>
-                <span class="quick-filter-tag">🏆 Vencedores do Oscar</span>
-                <span class="quick-filter-tag">🍿 Lançamentos 2026</span>
+                <span class="quick-filter-tag" data-filter="populares">🔥 Em Alta</span>
+                <span class="quick-filter-tag" data-filter="avaliados">⭐ Mais Bem Avaliados</span>
+                <span class="quick-filter-tag" data-filter="scifi">🚀 Ficção Científica</span>
+                <span class="quick-filter-tag" data-filter="terror">👻 Terror & Suspense</span>
+                <span class="quick-filter-tag" data-filter="reset">🔄 Restaurar Minhas Recomendações</span>
             </div>
         </section>
 
-        <!-- BARRA DE BUSCA E TÍTULO DA SEÇÃO DE RECOMENDAÇÕES -->
+        <!-- BARRA DE BUSCA E TÍTULO DA SEÇÃO DE FILMES -->
         <div class="search-section">
-            <h3 class="section-title">
+            <h3 class="section-title" id="section-title-text">
                 <span>🍿</span> Filmes e Séries Recomendados para Você
             </h3>
 
             <div class="search-input-wrapper">
-                <input type="search" id="search-movies" placeholder="Filtrar por título, gênero ou temática...">
+                <input type="search" id="search-movies" placeholder="Filtrar resultados exibidos...">
             </div>
         </div>
 

@@ -1,5 +1,5 @@
 /**
- * Script da Tela Inicial (Dashboard de Filmes Recomendados)
+ * Script da Tela Inicial (Dashboard de Filmes e Pesquisa Global)
  */
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Recupera dados do usuário salvos no cadastro (ou perfil padrão de demonstração)
@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const storedRecs = sessionStorage.getItem('cine_recommendations');
 
     let usuario = null;
-    let filmes = [];
+    let filmesIniciais = [];
+    let filmesAtuais = [];
 
     if (storedUser) {
         try {
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (storedRecs) {
         try {
-            filmes = JSON.parse(storedRecs);
+            filmesIniciais = JSON.parse(storedRecs);
         } catch (e) {
             console.error('Erro ao ler recomendações:', e);
         }
@@ -39,27 +40,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Se não tiver filmes no sessionStorage, usa catálogo padrão
-    if (!filmes || filmes.length === 0) {
-        filmes = obterFilmesPadrao();
+    if (!filmesIniciais || filmesIniciais.length === 0) {
+        filmesIniciais = obterFilmesPadrao();
     }
 
-    // 2. Atualiza os elementos da interface com o perfil do usuário
+    filmesAtuais = [...filmesIniciais];
+
+    // 2. Renderiza dados do usuário na interface
     renderizarPerfilUsuario(usuario);
 
-    // 3. Renderiza o grid de filmes
-    renderizarFilmes(filmes);
+    // 3. Renderiza catálogo inicial
+    renderizarFilmes(filmesAtuais);
 
-    // 4. Configura a busca / filtro instantâneo
-    const searchInput = document.getElementById('search-movies');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const termo = e.target.value.toLowerCase().trim();
-            if (!termo) {
-                renderizarFilmes(filmes);
+    // Determina a URL base da API (suporta Live Server 5500 ou mesma porta 8080)
+    const apiBaseUrl = window.location.port === '8080' ? '/api/filmes' : 'http://localhost:8080/api/filmes';
+
+    // 4. Configura o Formulário de Pesquisa Global de Filmes
+    const searchForm = document.getElementById('global-search-form');
+    const searchInput = document.getElementById('global-search-input');
+    const sectionTitle = document.getElementById('section-title-text');
+
+    if (searchForm && searchInput) {
+        searchForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const termo = searchInput.value.trim();
+            if (!termo) return;
+
+            await executarBuscaGlobal(termo);
+        });
+    }
+
+    // 5. Configura os Chips de Filtros Rápidos (Em Alta, Avaliados, etc.)
+    const quickTags = document.querySelectorAll('.quick-filter-tag');
+    quickTags.forEach(tag => {
+        tag.addEventListener('click', async () => {
+            const filtro = tag.getAttribute('data-filter');
+            if (filtro === 'reset') {
+                filmesAtuais = [...filmesIniciais];
+                if (sectionTitle) sectionTitle.innerHTML = '<span>🍿</span> Filmes e Séries Recomendados para Você';
+                if (searchInput) searchInput.value = '';
+                renderizarFilmes(filmesAtuais);
                 return;
             }
 
-            const filtrados = filmes.filter(f => {
+            await executarBuscaFiltro(filtro, tag.innerText);
+        });
+    });
+
+    // 6. Configura o filtro instantâneo local da lista exibida
+    const localFilterInput = document.getElementById('search-movies');
+    if (localFilterInput) {
+        localFilterInput.addEventListener('input', (e) => {
+            const termo = e.target.value.toLowerCase().trim();
+            if (!termo) {
+                renderizarFilmes(filmesAtuais);
+                return;
+            }
+
+            const filtrados = filmesAtuais.filter(f => {
                 const titulo = (f.titulo || '').toLowerCase();
                 const sinopse = (f.sinopse || '').toLowerCase();
                 const generos = (f.generos || []).join(' ').toLowerCase();
@@ -69,6 +107,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderizarFilmes(filtrados);
         });
+    }
+
+    /**
+     * Função que realiza a busca no Web Service do backend
+     */
+    async function executarBuscaGlobal(termo) {
+        exibirCarregando(`Buscando por "${termo}" no Web Service...`);
+
+        try {
+            const response = await fetch(`${apiBaseUrl}/pesquisar?termo=${encodeURIComponent(termo)}`);
+            if (!response.ok) throw new Error('Falha ao comunicar com o servidor');
+
+            const resultados = await response.json();
+            filmesAtuais = resultados;
+
+            if (sectionTitle) {
+                sectionTitle.innerHTML = `<span>🔍</span> Resultados para: "<em>${termo}</em>" <small style="font-size: var(--font-size-xs); color: var(--text-secondary);">(${resultados.length} encontrados)</small>`;
+            }
+
+            renderizarFilmes(filmesAtuais);
+
+            // Rola suavemente até os resultados
+            const grid = document.getElementById('movies-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        } catch (error) {
+            console.error('Erro na pesquisa de filmes:', error);
+            // Fallback de pesquisa local se backend estiver offline
+            const filtrados = filmesIniciais.filter(f => 
+                (f.titulo || '').toLowerCase().includes(termo.toLowerCase()) ||
+                (f.sinopse || '').toLowerCase().includes(termo.toLowerCase())
+            );
+            filmesAtuais = filtrados.length > 0 ? filtrados : filmesIniciais;
+            renderizarFilmes(filmesAtuais);
+        }
+    }
+
+    /**
+     * Função que realiza busca por categorias rápidas
+     */
+    async function executarBuscaFiltro(filtro, label) {
+        exibirCarregando(`Carregando filmes (${label})...`);
+
+        try {
+            const response = await fetch(`${apiBaseUrl}/filtro?tipo=${encodeURIComponent(filtro)}`);
+            if (!response.ok) throw new Error('Falha ao consultar categoria');
+
+            const resultados = await response.json();
+            filmesAtuais = resultados;
+
+            if (sectionTitle) {
+                sectionTitle.innerHTML = `<span>${label.split(' ')[0]}</span> Categoria: ${label} <small style="font-size: var(--font-size-xs); color: var(--text-secondary);">(${resultados.length} filmes)</small>`;
+            }
+
+            renderizarFilmes(filmesAtuais);
+
+            const grid = document.getElementById('movies-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        } catch (error) {
+            console.error('Erro ao buscar filtro:', error);
+            renderizarFilmes(filmesAtuais);
+        }
+    }
+
+    function exibirCarregando(mensagem) {
+        const container = document.getElementById('movies-grid');
+        if (container) {
+            container.innerHTML = `
+                <div class="empty-state" style="border-style: solid;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏳</div>
+                    <h3>${mensagem}</h3>
+                    <p style="color: var(--text-muted);">Consultando API de filmes...</p>
+                </div>
+            `;
+        }
     }
 });
 
@@ -86,7 +200,6 @@ function renderizarPerfilUsuario(usuario) {
     if (displayName) displayName.innerText = usuario.nome;
     if (greeting) greeting.innerText = `Olá, ${usuario.nome}! 🎬`;
 
-    // Aplica a cor customizada escolhida no cadastro
     if (usuario.corPerfil) {
         if (heroSection) heroSection.style.borderLeftColor = usuario.corPerfil;
         if (avatar) avatar.style.backgroundColor = usuario.corPerfil;
@@ -100,7 +213,6 @@ function renderizarPerfilUsuario(usuario) {
         bio.innerText = usuario.bio || 'Aqui estão as melhores recomendações selecionadas com base nas suas respostas no cadastro.';
     }
 
-    // Tags de preferências
     if (tagsContainer) {
         tagsContainer.innerHTML = '';
 
@@ -135,11 +247,12 @@ function renderizarFilmes(listaFilmes) {
 
     container.innerHTML = '';
 
-    if (listaFilmes.length === 0) {
+    if (!listaFilmes || listaFilmes.length === 0) {
         container.innerHTML = `
             <div class="empty-state">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎬</div>
                 <h3>Nenhum filme encontrado</h3>
-                <p>Tente buscar por outro termo ou gênero cinematográfico.</p>
+                <p>Tente buscar por outro título, palavra-chave ou utilize os filtros rápidos acima.</p>
             </div>
         `;
         return;
@@ -151,7 +264,7 @@ function renderizarFilmes(listaFilmes) {
 
         const poster = filme.posterUrl || 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500&auto=format&fit=crop&q=60';
         const ano = filme.dataLancamento ? filme.dataLancamento.split('-')[0] : '2024';
-        const nota = filme.notaMedia ? filme.notaMedia.toFixed(1) : '8.5';
+        const nota = filme.notaMedia ? filme.notaMedia.toFixed(1) : '8.0';
         const generos = filme.generos && filme.generos.length > 0 ? filme.generos : ['Cinema'];
         const motivo = filme.motivoRecomendacao || 'Selecionado para combinar com suas preferências.';
 
@@ -177,9 +290,6 @@ function renderizarFilmes(listaFilmes) {
     });
 }
 
-/**
- * Catálogo de fallback se acessado diretamente
- */
 function obterFilmesPadrao() {
     return [
         {

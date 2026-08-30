@@ -23,6 +23,13 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 
+		<!-- Leitor de variáveis do arquivo .env -->
+		<dependency>
+			<groupId>io.github.cdimascio</groupId>
+			<artifactId>dotenv-java</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
 		<!-- Spring Security (para BCrypt e criptografia de senhas) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

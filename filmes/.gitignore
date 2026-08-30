@@ -4,6 +4,13 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Arquivos de Ambiente e Chaves de API (Segurança) ###
+.env
+.env.*
+!.env.example
+*.env
+*.env.local
+
 ### STS ###
 .apt_generated
 .classpath

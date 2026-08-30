@@ -1,0 +1,25 @@
+# Arquivos de Ambiente e Chaves de API (Segurança)
+.env
+.env.*
+!.env.example
+*.env
+*.env.local
+
+# Builds e dependências
+target/
+build/
+.gradle/
+*.class
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# Logs e OS
+*.log
+.DS_Store
+Thumbs.db
