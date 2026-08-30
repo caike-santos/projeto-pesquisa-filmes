@@ -89,8 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setLoadingState(true);
         esconderMensagem();
 
-        // Determina a URL da API (suporta tanto rodando junto quanto porta 8080)
-        const apiUrl = window.location.port === '8080' ? '/api/usuarios' : 'http://localhost:8080/api/usuarios';
+        // Determina a URL da API (suporta tanto rodando junto quanto Live Server ou porta 8080)
+        const host = window.location.hostname === '127.0.0.1' ? '127.0.0.1' : 'localhost';
+        const apiUrl = window.location.port === '8080' ? '/api/usuarios' : `http://${host}:8080/api/usuarios`;
 
         try {
             const response = await fetch(apiUrl, {

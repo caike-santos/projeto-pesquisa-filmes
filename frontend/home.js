@@ -52,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Renderiza catálogo inicial
     renderizarFilmes(filmesAtuais);
 
-    // Determina a URL base da API (suporta Live Server 5500 ou mesma porta 8080)
-    const apiBaseUrl = window.location.port === '8080' ? '/api/filmes' : 'http://localhost:8080/api/filmes';
+    // Determina a URL base da API (suporta Live Server 5500, 127.0.0.1 ou porta 8080)
+    const host = window.location.hostname === '127.0.0.1' ? '127.0.0.1' : 'localhost';
+    const apiBaseUrl = window.location.port === '8080' ? '/api/filmes' : `http://${host}:8080/api/filmes`;
 
     // 4. Configura o Formulário de Pesquisa Global de Filmes
     const searchForm = document.getElementById('global-search-form');

@@ -7,8 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackBox = document.getElementById('login-feedback');
     const originalBtnText = submitBtn ? submitBtn.innerText : 'Entrar no CinePerfil';
 
-    // Determina a URL base da API (suporta Live Server 5500, GitHub Pages ou porta 8080)
-    const apiBaseUrl = window.location.port === '8080' ? '/api/usuarios' : 'http://localhost:8080/api/usuarios';
+    // Determina a URL base da API dinamicamente
+    function getApiUrl(endpoint) {
+        if (window.location.port === '8080') {
+            return endpoint;
+        }
+        const host = window.location.hostname === '127.0.0.1' ? '127.0.0.1' : 'localhost';
+        return `http://${host}:8080${endpoint}`;
+    }
 
     if (form) {
         form.addEventListener('submit', async (event) => {
@@ -26,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
             esconderMensagem();
 
             try {
-                const response = await fetch(`${apiBaseUrl}/login`, {
+                const url = getApiUrl('/api/usuarios/login');
+                const response = await fetch(url, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -63,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let userMessage = error.message;
                 if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
-                    userMessage = 'Não foi possível conectar ao servidor backend (http://localhost:8080). Verifique se o Spring Boot está em execução.';
+                    userMessage = 'Não foi possível conectar ao servidor backend. Verifique se o Spring Boot está em execução.';
                 }
 
                 exibirMensagem('error', `❌ ${userMessage}`);
