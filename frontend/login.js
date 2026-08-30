@@ -7,8 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const feedbackBox = document.getElementById('login-feedback');
     const originalBtnText = submitBtn ? submitBtn.innerText : 'Entrar no CinePerfil';
 
-    // Determina a URL base da API dinamicamente
+    // Determina a URL base da API dinamicamente (Cloudflare, Live Server ou Localhost)
+    const CLOUDFLARE_URL = 'https://raise-athens-ntsc-join.trycloudflare.com';
+
     function getApiUrl(endpoint) {
+        if (window.location.hostname.includes('github.io')) {
+            return `${CLOUDFLARE_URL}${endpoint}`;
+        }
         if (window.location.port === '8080') {
             return endpoint;
         }
