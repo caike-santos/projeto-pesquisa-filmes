@@ -89,16 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setLoadingState(true);
         esconderMensagem();
 
-        // URL do backend no Cloudflare (celular) ou Localhost
-        const CLOUDFLARE_URL = 'https://raise-athens-ntsc-join.trycloudflare.com';
-        let apiUrl = '/api/usuarios';
-
-        if (window.location.hostname.includes('github.io')) {
-            apiUrl = `${CLOUDFLARE_URL}/api/usuarios`;
-        } else if (window.location.port !== '8080') {
-            const host = window.location.hostname === '127.0.0.1' ? '127.0.0.1' : 'localhost';
-            apiUrl = `http://${host}:8080/api/usuarios`;
-        }
+        // Obtém a URL da API dinamicamente via config.js
+        const apiUrl = window.API_CONFIG ? window.API_CONFIG.getUrl('/api/usuarios') : '/api/usuarios';
 
         try {
             const response = await fetch(apiUrl, {

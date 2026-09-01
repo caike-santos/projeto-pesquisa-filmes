@@ -52,16 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Renderiza catálogo inicial
     renderizarFilmes(filmesAtuais);
 
-    // Determina a URL base da API (suporta GitHub Pages via Cloudflare, Live Server 5500 ou porta 8080)
-    const CLOUDFLARE_URL = 'https://raise-athens-ntsc-join.trycloudflare.com';
-    let apiBaseUrl = '/api/filmes';
-
-    if (window.location.hostname.includes('github.io')) {
-        apiBaseUrl = `${CLOUDFLARE_URL}/api/filmes`;
-    } else if (window.location.port !== '8080') {
-        const host = window.location.hostname === '127.0.0.1' ? '127.0.0.1' : 'localhost';
-        apiBaseUrl = `http://${host}:8080/api/filmes`;
-    }
+    // Determina a URL base da API dinamicamente via config.js
+    const apiBaseUrl = window.API_CONFIG ? window.API_CONFIG.getUrl('/api/filmes') : '/api/filmes';
 
     // 4. Configura o Formulário de Pesquisa Global de Filmes
     const searchForm = document.getElementById('global-search-form');
