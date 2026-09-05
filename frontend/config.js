@@ -3,7 +3,7 @@
  */
 const API_CONFIG = {
     // URL gerada pelo Cloudflare Tunnel no celular
-    CLOUDFLARE_URL: 'https://speeds-dts-judgment-eleven.trycloudflare.com',
+    CLOUDFLARE_URL: 'https://remarkable-deck-poison-skins.trycloudflare.com',
 
     /**
      * Retorna a URL completa da API baseada no ambiente onde o frontend está rodando
