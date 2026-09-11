@@ -3,7 +3,7 @@
  */
 const API_CONFIG = {
     // URL gerada pelo Cloudflare Tunnel no celular
-    CLOUDFLARE_URL: 'https://months-powerseller-seriously-encoding.trycloudflare.com',
+    CLOUDFLARE_URL: 'https://southern-tempo ral-mirrors-ordinary.trycloudflare.com',
 
     /**
      * Retorna a URL completa da API baseada no ambiente onde o frontend está rodando
